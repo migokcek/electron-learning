@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require("path");
 
 const HEIGHT = 500;
@@ -27,3 +27,29 @@ app.whenReady().then(()=> {
 app.on("window-all-closed", () => {
   if(process.platform !== "darwin") app.quit();
 })
+
+const menuItems = [
+  {
+    label: "Menu",
+    submenu: [
+      {
+        label: "About",
+      }
+    ]
+  },
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Learn More",
+      },
+      {
+        label: "Exit",
+        click: () => app.quit()
+      },
+    ]
+  }
+]
+
+const menu = Menu.buildFromTemplate(menuItems);
+Menu.setApplicationMenu(menu);
